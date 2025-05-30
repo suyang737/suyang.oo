@@ -1,27 +1,80 @@
-function changeMessage() {
-    document.getElementById('message').textContent = '버튼을 클릭하셨습니다!';
-}
-
-function goToNaver() {
-    window.location.href = 'https://www.naver.com/';
-}
-
-function getNewsLinkName() {
-    return '네이버 뉴스';
-}
-
-// 새로운 함수: 네이버 뉴스 링크를 동적으로 생성
-function renderNewsLink() {
-    const container = document.getElementById('news-link-container');
-    if (container) {
-        container.innerHTML = `<a href="https://www.naver.com/" target="_blank">${getNewsLinkName()}</a>`;
+const zodiacDescriptions = {
+    "양자리": "양자리 (3/21~4/19): 열정적이고 모험을 좋아합니다.",
+    "황소자리": "황소자리 (4/20~5/20): 안정적이고 신뢰할 수 있습니다.",
+    "쌍둥이자리": "쌍둥이자리 (5/21~6/21): 지적이고 호기심이 많습니다.",
+    "게자리": "게자리 (6/22~7/22): 감성적이고 보호본능이 강합니다.",
+    "사자자리": "사자자리 (7/23~8/22): 리더십이 강하고 자신감 있습니다.",
+    "처녀자리": "처녀자리 (8/23~9/23): 꼼꼼하고 체계적입니다.",
+    "천칭자리": "천칭자리 (9/24~10/22): 공정하고 조화를 중요시합니다.",
+    "전갈자리": "전갈자리 (10/23~11/22): 강렬하고 열정적입니다.",
+    "사수자리": "사수자리 (11/23~12/24): 자유롭고 낙천적입니다.",
+    "염소자리": "염소자리 (12/25~1/19): 현실적이고 책임감이 강합니다.",
+    "물병자리": "물병자리 (1/20~2/18): 창의적이고 독립적입니다.",
+    "물고기자리": "물고기자리 (2/19~3/20): 감수성이 풍부하고 상상력이 큽니다."
+  };
+  
+  function showZodiac(sign) {
+    const descDiv = document.getElementById("description");
+    descDiv.textContent = zodiacDescriptions[sign];
+  }
+  const zodiacData = {
+    "양자리": {
+      description: "양자리 (3/21~4/19): 열정적이고 모험을 좋아합니다.",
+      fortune2025: "2025년은 새로운 도전이 많아지는 해입니다. 자신감을 가지고 나아가면 좋은 결과가 있을 것입니다."
+    },
+    "황소자리": {
+      description: "황소자리 (4/20~5/20): 안정적이고 신뢰할 수 있습니다.",
+      fortune2025: "2025년에는 재정운이 상승합니다. 꾸준한 노력이 결실을 맺는 해가 될 것입니다."
+    },
+    "쌍둥이자리": {
+      description: "쌍둥이자리 (5/21~6/21): 지적이고 호기심이 많습니다.",
+      fortune2025: "2025년은 학업이나 직장생활에 큰 성장이 기대됩니다. 새로운 사람들과의 만남도 긍정적입니다."
+    },
+    "게자리": {
+      description: "게자리 (6/22~7/22): 감성적이고 보호본능이 강합니다.",
+      fortune2025: "2025년은 가족과의 유대가 깊어지는 시기입니다. 건강에 특히 신경 써야 합니다."
+    },
+    "사자자리": {
+      description: "사자자리 (7/23~8/22): 리더십이 강하고 자신감 있습니다.",
+      fortune2025: "2025년은 리더십이 빛나는 해입니다. 새로운 프로젝트에서 두각을 나타낼 수 있습니다."
+    },
+    "처녀자리": {
+      description: "처녀자리 (8/23~9/23): 꼼꼼하고 체계적입니다.",
+      fortune2025: "2025년에는 세부적인 계획이 성공의 열쇠가 됩니다. 건강과 업무 균형에 주의하세요."
+    },
+    "천칭자리": {
+      description: "천칭자리 (9/24~10/22): 공정하고 조화를 중요시합니다.",
+      fortune2025: "2025년은 인간관계에서 큰 발전이 있습니다. 협력이 성공을 부릅니다."
+    },
+    "전갈자리": {
+      description: "전갈자리 (10/23~11/22): 강렬하고 열정적입니다.",
+      fortune2025: "2025년은 열정을 불태울 기회가 많습니다. 감정을 잘 조절하는 것이 중요합니다."
+    },
+    "사수자리": {
+      description: "사수자리 (11/23~12/24): 자유롭고 낙천적입니다.",
+      fortune2025: "2025년은 여행과 자기계발에 좋은 시기입니다. 긍정적인 변화가 찾아옵니다."
+    },
+    "염소자리": {
+      description: "염소자리 (12/25~1/19): 현실적이고 책임감이 강합니다.",
+      fortune2025: "2025년은 성실함이 인정받는 해입니다. 꾸준히 노력하면 좋은 결과가 따릅니다."
+    },
+    "물병자리": {
+      description: "물병자리 (1/20~2/18): 창의적이고 독립적입니다.",
+      fortune2025: "2025년은 창의력이 빛나는 해입니다. 새로운 아이디어가 성공으로 이어집니다."
+    },
+    "물고기자리": {
+      description: "물고기자리 (2/19~3/20): 감수성이 풍부하고 상상력이 큽니다.",
+      fortune2025: "2025년은 감성이 풍부해져 예술적 재능이 두드러집니다. 내면의 평화를 찾는 해입니다."
     }
-}
+  };
+  
+  function showZodiac(sign) {
+    const descDiv = document.getElementById("description");
+    const data = zodiacData[sign];
+    descDiv.innerHTML = `
+      <h2>${sign}</h2>
+      <p>${data.description}</p>
+      <p><strong>2025년 운세:</strong> ${data.fortune2025}</p>
+    `;
+  }
 
-// 새로운 함수: 네이버로 이동하는 버튼을 동적으로 생성
-function renderNaverButton() {
-    const container = document.getElementById('naver-button-container');
-    if (container) {
-        container.innerHTML = `<button onclick="goToNaver()">네이버로 이동</button>`;
-    }
-}
